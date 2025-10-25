@@ -1,0 +1,26 @@
+.text-insert-field {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  background-color: #edeef0;
+  border-radius: 10px;
+}
+.text-insert-field input {
+  border-radius: 10px;
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px;
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+}
+.text-insert-field button {
+  padding: 10px;
+  border: none;
+  background-color: #153677;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
