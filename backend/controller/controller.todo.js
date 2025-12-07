@@ -4,6 +4,7 @@ export const createTodo = async (req, res) => {
   const todo = new Todo({
     text: req.body.text,
     completed: req.body.completed,
+    user: req.user._id
   });
   try {
     const newTodo = await todo.save();
@@ -16,7 +17,8 @@ export const createTodo = async (req, res) => {
 
 export const getTodos = async (req, res) => {
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find({ user: req.user._id }
+);
     res.status(201).json({ message: "todos retrieved successfully", todos });
   } catch (error) {
     console.log(error);

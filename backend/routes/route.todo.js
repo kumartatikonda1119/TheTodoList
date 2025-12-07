@@ -6,9 +6,10 @@ import {
   updateTodo,
 } from "../controller/controller.todo.js";
 const router = express.Router();
+import { authenticate } from "../middleware/authorize.js";
 
-router.post("/create", createTodo);
-router.get("/fetch", getTodos);
-router.put("/update/:id", updateTodo);
-router.delete("/delete/:id", deleteTodo);
+router.post("/create",authenticate, createTodo);
+router.get("/fetch",authenticate, getTodos);
+router.put("/update/:id",authenticate, updateTodo);
+router.delete("/delete/:id",authenticate, deleteTodo);
 export default router;

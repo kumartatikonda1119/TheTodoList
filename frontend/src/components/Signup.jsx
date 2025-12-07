@@ -11,7 +11,7 @@ function Signup() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://thetodolistbackend.onrender.com/user/signup",
+        "http://localhost:5001/user/signup",
         {
           username,
           email,
@@ -27,14 +27,15 @@ function Signup() {
       console.log("signup successful");
       const data = response.data;
       toast.success(data.message || "signup successful");
+      localStorage.setItem("jwt", data.token);
+      navigate("/login");
       setUsername("");
       setEmail("");
       setPassword("");
-      navigate("/login");
       console.log(data);
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.errors || "signup failed");
+      toast.error(error.response.data.message || "signup failed");
     }
   };
   return (
