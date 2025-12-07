@@ -59,7 +59,7 @@ export const login = async (req, res) => {
     const token = await generateTokenAndSaveInCookie(user._id, res);
     return res
       .status(200)
-      .json({ message: "user logged in successfully", user });
+      .json({ message: "user logged in successfully", user, token });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "error in user login" });

@@ -5,17 +5,22 @@ import Signup from "./components/Signup.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound.jsx";
 import { Toaster } from "react-hot-toast";
-
+import { Navigate } from "react-router-dom";
 function App() {
+  const token = localStorage.getItem("jwt");
+
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="*" element={<PageNotFound />}></Route>
+          <Route
+            path="/"
+            element={token ? <Home /> : <Navigate to={"/login"} />}
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </>
