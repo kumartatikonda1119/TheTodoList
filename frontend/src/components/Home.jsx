@@ -11,9 +11,12 @@ function Home() {
     const fetchTodos = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:5001/todo/fetch", {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "https://thetodolistbackend.onrender.com/todo/fetch",
+          {
+            withCredentials: true,
+          }
+        );
         console.log(response.data.todos);
         setTodos(response.data.todos);
         setErrors(null);
@@ -30,7 +33,7 @@ function Home() {
     if (!newTodo) return;
     try {
       const response = await axios.post(
-        "http://localhost:5001/todo/create",
+        "https://thetodolistbackend.onrender.com/todo/create",
         {
           text: newTodo,
           completed: false,
@@ -50,7 +53,7 @@ function Home() {
     const todo = todos.find((t) => t._id === id);
     try {
       const response = await axios.put(
-        `http://localhost:5001/todo/update/${id}`,
+        `https://thetodolistbackend.onrender.com/todo/update/${id}`,
         {
           ...todo,
           completed: !todo.completed,
@@ -67,9 +70,12 @@ function Home() {
   };
   const todoDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5001/todo/delete/${id}`, {
-        withCredentials: true,
-      });
+      await axios.delete(
+        `https://thetodolistbackend.onrender.com/todo/delete/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
       setTodos(todos.filter((t) => t._id !== id));
     } catch (error) {
       setErrors("failed to delete todo");
@@ -79,7 +85,7 @@ function Home() {
 
   const logout = async () => {
     try {
-      await axios.get("http://localhost:5001/user/logout", {
+      await axios.get("https://thetodolistbackend.onrender.com/user/logout", {
         withCredentials: true,
       });
       toast.success("User logged out successfully");
