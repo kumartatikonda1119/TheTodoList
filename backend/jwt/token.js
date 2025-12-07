@@ -9,7 +9,7 @@ export const generateTokenAndSaveInCookie = async (userId, res) => {
   res.cookie("jwt", token, {
     httpOnly: true,
     secure: true,
-    sameSite: "lax",
+    sameSite: "none",
     path: "/",
   });
   await User.findByIdAndUpdate(userId, { token: token });

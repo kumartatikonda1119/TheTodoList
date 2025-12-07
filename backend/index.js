@@ -6,7 +6,7 @@ import userRoute from "../backend/routes/route.user.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5001;
 const MONGODB_URI = process.env.MONGODB_URI;
 const origin = process.env.FRONTEND_URL;
 console.log("FRONTEND_URL:", origin);
@@ -20,7 +20,7 @@ try {
 
 app.use(cookieParser());
 app.use(cors({ 
-  origin: origin,
+   origin: origin,
    credentials: true,
    methods: ["GET", "POST", "PUT", "DELETE"],
    allowedHeaders: ["Content-Type", "Authorization"],
@@ -32,9 +32,7 @@ app.use("/todo", todoRoute);
 
 app.use("/user", userRoute);
 
-app.get("/", (req, res) => {
-  res.send("hey hello from kumar");
-});
+
 
 app.listen(PORT, () => {
   console.log(`server running on port  http://localhost:${PORT}`);
