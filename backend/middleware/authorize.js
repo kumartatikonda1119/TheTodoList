@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 import User from "../model/user.model.js";
 export const authenticate = async (req, res, next) => {
   const token = req.cookies.jwt;
-  console.log(token + " from authorize middleware");
+  console.log(req.cookies);
+  
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
   }
