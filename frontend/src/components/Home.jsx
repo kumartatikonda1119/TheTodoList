@@ -96,7 +96,6 @@ function Home({ setToken }) {
       });
       toast.success("User logged out successfully");
 
-      // clear token from both state and localStorage
       localStorage.removeItem("jwt");
       setToken(null);
 
