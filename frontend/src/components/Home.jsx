@@ -2,18 +2,25 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-function Home() {
+
+function Home({ setToken }) {
   const [todos, setTodos] = React.useState([]);
   const [errors, setErrors] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [newTodo, setNewTodo] = React.useState("");
+
+  const navigateTo = useNavigate();
+
   useEffect(() => {
     const fetchTodos = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("https://thetodolistbackend.onrender.com/todo/fetch", {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "https://thetodolistbackend.onrender.com/todo/fetch",
+          {
+            withCredentials: true,
+          }
+        );
         console.log(response.data.todos);
         setTodos(response.data.todos);
         setErrors(null);
@@ -26,6 +33,7 @@ function Home() {
 
     fetchTodos();
   }, []);
+
   const todoCreate = async () => {
     if (!newTodo) return;
     try {
@@ -46,6 +54,7 @@ function Home() {
       setErrors("failed to create todo");
     }
   };
+
   const todoStatus = async (id) => {
     const todo = todos.find((t) => t._id === id);
     try {
@@ -65,17 +74,20 @@ function Home() {
       setErrors("failed to update todo status");
     }
   };
+
   const todoDelete = async (id) => {
     try {
-      await axios.delete(`https://thetodolistbackend.onrender.com/todo/delete/${id}`, {
-        withCredentials: true,
-      });
+      await axios.delete(
+        `https://thetodolistbackend.onrender.com/todo/delete/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
       setTodos(todos.filter((t) => t._id !== id));
     } catch (error) {
       setErrors("failed to delete todo");
     }
   };
-  const navigateTo = useNavigate();
 
   const logout = async () => {
     try {
@@ -83,13 +95,19 @@ function Home() {
         withCredentials: true,
       });
       toast.success("User logged out successfully");
-      navigateTo("/login");
+
+      // clear token from both state and localStorage
       localStorage.removeItem("jwt");
+      setToken(null);
+
+      navigateTo("/login");
     } catch (error) {
       toast.error("Error logging out");
     }
   };
+
   const remainingTodos = todos.filter((t) => !t.completed).length;
+
   return (
     <div className="bg-gray-200 max-w-lg lg:max-w-xl rounded shadow-lg mx-8 sm:mx-auto p-6 mt-10">
       <h1 className="text-2xl font-semibold text-center">ToDo List</h1>
@@ -122,8 +140,6 @@ function Home() {
               <div className="flex items-center ">
                 <input
                   type="checkbox"
-                  name=""
-                  id=""
                   className="mr-2"
                   checked={todo.completed}
                   onChange={() => todoStatus(todo._id)}
@@ -152,7 +168,7 @@ function Home() {
       <center>
         <button
           className="bg-red-600 border  text-center rounded text-white py-2 px-4 hover:bg-red-800 duration-300"
-          onClick={() => logout()}
+          onClick={logout}
         >
           logout
         </button>
@@ -160,4 +176,5 @@ function Home() {
     </div>
   );
 }
+
 export default Home;

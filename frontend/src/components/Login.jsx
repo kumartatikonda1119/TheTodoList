@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-function Login() {
+
+function Login({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,15 +25,20 @@ function Login() {
           },
         }
       );
+
       console.log(data);
-      toast.success(data.message || "User loggedin successfully");
+      toast.success(data.message || "User logged in successfully");
+
+      // update localStorage + React state
       localStorage.setItem("jwt", data.token);
+      setToken(data.token);
+
       navigateTo("/");
       setEmail("");
       setPassword("");
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message || "User registration failed");
+      toast.error(error?.response?.data?.message || "User login failed");
     }
   };
 
@@ -66,7 +72,7 @@ function Login() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Type Username"
+                  placeholder="Type Password"
                 />
               </div>
 

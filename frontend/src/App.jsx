@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem("jwt"));
+
   console.log("token in App:", token);
 
   return (
@@ -17,9 +18,18 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={token ? <Home /> : <Navigate to="/login" />}
+            element={
+              token ? <Home setToken={setToken} /> : <Navigate to="/login" />
+            }
           />
-          <Route path="/login" element={<Login setToken={setToken} />} />
+
+          <Route
+            path="/login"
+            element={
+              token ? <Navigate to="/" /> : <Login setToken={setToken} />
+            }
+          />
+
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
