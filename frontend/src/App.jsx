@@ -5,6 +5,7 @@ import Signup from "./components/Signup.jsx";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound.jsx";
 import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem("jwt"));
@@ -12,7 +13,7 @@ function App() {
   console.log("token in App:", token);
 
   return (
-    <>
+    <ThemeProvider>
       <Toaster position="top-center" reverseOrder={false} />
       <BrowserRouter>
         <Routes>
@@ -34,7 +35,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </ThemeProvider>
   );
 }
 

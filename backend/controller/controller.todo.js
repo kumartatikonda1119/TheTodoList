@@ -18,7 +18,14 @@ export const createTodo = async (req, res) => {
 export const getTodos = async (req, res) => {
   try {
     const todos = await Todo.find({ user: req.user._id });
-    res.status(201).json({ message: "todos retrieved successfully", todos });
+    res.status(201).json({
+      message: "todos retrieved successfully",
+      todos,
+      user: {
+        username: req.user.username,
+        _id: req.user._id,
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "error in todo fetching" });
