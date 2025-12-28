@@ -43,14 +43,6 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-// Handle preflight for all routes
-app.options(
-  "*",
-  cors({
-    origin: originList,
-    credentials: true,
-  })
-);
 app.use(express.json());
 
 app.use("/todo", todoRoute);
