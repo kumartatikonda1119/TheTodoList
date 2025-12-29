@@ -21,7 +21,7 @@ function Home({ setToken }) {
       setLoading(true);
       try {
         const response = await axiosInstance.get("/todo/fetch");
-        console.log(response.data);
+        // console.log(response.data);
         setTodos(response.data.todos);
         if (response.data.user && response.data.user.username) {
           setUsername(response.data.user.username);
@@ -46,7 +46,7 @@ function Home({ setToken }) {
       });
       setTodos([...todos, response.data.newTodo]);
       setNewTodo("");
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       setErrors("failed to create todo");
     }
@@ -60,7 +60,7 @@ function Home({ setToken }) {
         completed: !todo.completed,
       });
       setTodos(todos.map((t) => (t._id === id ? response.data.todo : t)));
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       setErrors("failed to update todo status");
     }

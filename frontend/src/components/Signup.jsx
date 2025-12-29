@@ -20,7 +20,7 @@ function Signup() {
         email,
         password,
       });
-      console.log("signup successful");
+      // console.log("signup successful");
       const data = response.data;
       toast.success(data.message || "signup successful");
       localStorage.setItem("jwt", data.token);
@@ -28,9 +28,9 @@ function Signup() {
       setUsername("");
       setEmail("");
       setPassword("");
-      console.log(data);
+      // console.log(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.response.data.message || "signup failed");
     } finally {
       setLoading(false);

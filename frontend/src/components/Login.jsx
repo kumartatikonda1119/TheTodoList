@@ -29,7 +29,7 @@ function Login({ setToken }) {
         }
       );
 
-      console.log(data);
+      // console.log(data);
       toast.success(data.message || "User logged in successfully");
 
       // update localStorage + React state
@@ -40,7 +40,7 @@ function Login({ setToken }) {
       setEmail("");
       setPassword("");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.response?.data?.message || "User login failed");
     } finally {
       setLoading(false);
