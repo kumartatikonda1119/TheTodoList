@@ -1,6 +1,6 @@
 import React from "react";
 import { IoLogOut } from "react-icons/io5";
-import { GiBat } from "react-icons/gi";
+import { GiBat, GiBatMask } from "react-icons/gi";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useTheme } from "../context/ThemeContext";
 
@@ -13,7 +13,7 @@ function Navbar({ username, onLogout }) {
         <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo and Brand */}
           <div className="flex items-center space-x-1 sm:space-x-2">
-            <GiBat className="text-2xl sm:text-3xl lg:text-4xl" />
+            <GiBatMask className="text-2xl sm:text-3xl lg:text-4xl" />
             <h1 className="text-lg sm:text-xl lg:text-2xl font-bold">
               BatTask
             </h1>
